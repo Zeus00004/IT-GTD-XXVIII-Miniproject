@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>JavaScript Miniproject</title>
+        <meta name="description" content="HTML & CSS Miniproject">
+        <link rel="stylesheet" href="main.css">
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                max-width: 600px;
+                margin: 50px auto;
+                padding: 20px;
+                background-color: #f9f9f9;
+            }
+
+            h2 {
+                color: #333;
+            }
+
+            .counter {
+                text-align: center;
+                margin-bottom: 30px;
+                padding: 20px;
+                background-color: #fff;
+                box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+                border-radius: 8px;
+            }
+
+            .counter button {
+                padding: 10px 20px;
+                margin: 5px;
+                font-size: 16px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            .counter button:hover {
+                opacity: 0.8;
+            }
+
+            #increase { background-color: #4CAF50; color: white; }
+            #decrease { background-color: #f44336; color: white; }
+            #reset { background-color: #2196F3; color: white; }
+
+            .comment-section {
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+            }
+
+            .comment-section input, 
+            .comment-section textarea {
+                width: 90%;
+                padding: 10px;
+                margin-bottom: 10px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                font-size: 14px;
+            }
+
+            .comment-section button {
+                background-color: #2196F3;
+                color: white;
+                padding: 10px 15px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                margin-bottom: 20px;
+            }
+
+            .comment-section button:hover {
+                opacity: 0.8;
+            }
+            
+            .btn-container{
+                text-align: center;
+                margin-top: 50px;
+            }
+
+            .btn {
+                background: #4A90E2;
+                color: white;
+                padding: 10px 18px;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: 0.4s;
+                padding:17px;
+                margin: 0px auto;
+            }
+
+            .btn:hover {
+                background: #3B7CC2;
+                box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
+                transform: translateY(-2px);
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="counter">
+            <h2>Simple Counter App</h2>
+            <p style="margin-bottom: 20px">Current Count: <span id="count">0</span></p>
+            <button id="increase">Increase</button>
+            <button id="decrease">Decrease</button>
+            <button id="reset">Reset</button>
+            <p id="errorMsgBtn" style="color:red;"></p> 
+        </div>
+
+        <div class="comment-section">
+            <h2>Comment Box</h2>
+            <input type="text" id="email" placeholder="Email Address">
+            <textarea id="comment" placeholder="Comment"></textarea>
+            <button id="submitComment">Submit</button>
+            <p id="errorMsg" style="color:red;"></p> 
+        </div>
+        
+        <div class="btn-container">
+            <a href="../index.html" class="btn">Home</a>
+        </div>
+
+        <script>
+            // Counter functionality
+            let count = 0;
+            const countDisplay = document.getElementById('count');
+            const errorMsgBtn = document.getElementById('errorMsgBtn');
+            document.getElementById('increase').addEventListener('click', () => {
+                count++;
+                countDisplay.textContent = count;
+                errorMsgBtn.textContent = "";
+            });
+
+            document.getElementById('decrease').addEventListener('click', () => {
+                if (count > 0) count--;
+                else{
+                    errorMsgBtn.textContent = "Counter cannot be negative number!";
+                    return;
+                }
+                countDisplay.textContent = count;
+            });
+
+            document.getElementById('reset').addEventListener('click', () => {
+                count = 0;
+                countDisplay.textContent = count;
+                errorMsgBtn.textContent = "";
+            });
+
+            // Clear input boxes on submit
+            document.getElementById('submitComment').addEventListener('click', (e) => {
+                e.preventDefault(); // prevent form submission
+
+                const email = document.getElementById('email').value.trim();
+                const comment = document.getElementById('comment').value.trim();
+                const errorMsg = document.getElementById('errorMsg');
+
+                // Simple email validation regex
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+                if (!emailPattern.test(email)) {
+                    errorMsg.textContent = "Invalid email!";
+                    return;
+                }
+
+                // Optional: check if comment is empty
+                if (!comment) {
+                    errorMsg.textContent = "Please enter a comment!";
+                    return;
+                }
+
+                // Clear inputs if valid
+                errorMsg.textContent = "";
+                document.getElementById('email').value = '';
+                document.getElementById('comment').value = '';
+            });
+        </script>
+    </body>
+</html>
