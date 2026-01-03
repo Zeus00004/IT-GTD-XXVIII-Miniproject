@@ -14,12 +14,20 @@ function App() {
   }, [tasks])
 
   return (
-  <div className="bg-gray-200 min-h-screen">
+    <div className="bg-gray-200 min-h-screen">
       <h1 className='text-4xl text-center font-bold p-4'>Todo List</h1>
+
       <AddTaskForm tasks={tasks} setTasks={setTasks}/>
       <TaskViewList tasks={tasks} setTasks={setTasks}/>
-    </div>
-  )
-}
+
+      {/* ⬇️ BUTTON AT BOTTOM */}
+      <div className="text-center py-6">
+        <a href="https://it-gtd-xxviii-miniproject.vercel.app/index.html">
+          <button className="bg-blue-500 text-white px-4 py-2 rounded">
+            Back to Main Page
+          </button>
+        </a>
+      </div>
+  </div>
 
 export default App
